@@ -9,23 +9,29 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-20 md:py-28 bg-card">
-      <div className="container">
+    <section id="how-it-works" className="py-24 md:py-32 bg-card relative overflow-hidden">
+      <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
+      
+      <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-            How <span className="text-gradient">Vendor</span> Works
+          <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-3 block">How it works</span>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-5">
+            Three Steps to <span className="text-gradient">Delicious</span>
           </h2>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            Three simple steps to your next favourite meal.
+          <p className="text-muted-foreground max-w-md mx-auto text-lg">
+            From craving to doorstep in minutes.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto relative">
+          {/* Connecting line */}
+          <div className="hidden md:block absolute top-10 left-[16.67%] right-[16.67%] h-[2px] bg-gradient-to-r from-primary/30 via-primary to-primary/30" />
+          
           {steps.map((s, i) => (
             <motion.div
               key={s.step}
@@ -35,8 +41,8 @@ const HowItWorks = () => {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="text-center relative"
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                <s.icon size={28} className="text-primary" />
+              <div className="w-20 h-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg shadow-primary/25">
+                <s.icon size={30} />
               </div>
               <span className="text-xs font-bold text-primary tracking-widest uppercase">Step {s.step}</span>
               <h3 className="font-bold text-xl mt-2 mb-3">{s.title}</h3>

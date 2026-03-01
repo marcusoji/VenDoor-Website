@@ -1,57 +1,103 @@
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin } from "lucide-react";
-import heroImg from "@/assets/hero-illustration.png";
+import { ArrowRight, Sparkles } from "lucide-react";
+import PhoneMockup from "./PhoneMockup";
+import appHome from "@/assets/app-home.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Background decorative blob */}
-      <div className="absolute top-20 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 -left-32 w-80 h-80 bg-secondary/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative pt-24 pb-8 md:pt-32 md:pb-16 overflow-hidden min-h-[90vh] flex items-center">
+      {/* Layered background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/8 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/8 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-accent/10 rounded-full blur-[150px]" />
+      </div>
 
-      <div className="container">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Grid pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)`,
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="container relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
           >
-            <div className="inline-flex items-center gap-2 bg-accent/60 rounded-full px-4 py-1.5 mb-6">
-              <MapPin size={14} className="text-primary" />
-              <span className="text-xs font-medium text-muted-foreground">Now available in your city</span>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground rounded-full px-5 py-2 mb-8"
+            >
+              <Sparkles size={14} className="text-primary" />
+              <span className="text-xs font-bold tracking-wide">Nigeria's Fastest Growing Food App</span>
+            </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-              Delicious Food,{" "}
-              <span className="text-gradient">Delivered Fast</span>{" "}
-              to Your Door
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-8 tracking-tight">
+              Your Next
+              <br />
+              <span className="text-gradient">Favourite Meal</span>
+              <br />
+              is One Tap Away
             </h1>
 
-            <p className="text-lg text-muted-foreground max-w-md mb-8 leading-relaxed">
-              Explore restaurants near you, order your favourite meals, and get them delivered in minutes with <span className="font-semibold text-foreground">Vendor</span>.
+            <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-10 leading-relaxed">
+              Discover local vendors, customize your order, and get it delivered in minutes. 
+              <span className="text-foreground font-semibold"> Vendor</span> makes it effortless.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="bg-primary text-primary-foreground px-7 py-3.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-primary/25">
-                Download the App <ArrowRight size={16} />
+              <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl text-sm font-bold flex items-center gap-3 hover:opacity-90 transition-all shadow-xl shadow-primary/30 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98]">
+                Download Now <ArrowRight size={18} />
               </button>
-              <button className="bg-secondary text-secondary-foreground px-7 py-3.5 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity">
-                Become a Rider
+              <button className="bg-secondary text-secondary-foreground px-8 py-4 rounded-2xl text-sm font-bold hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                Become a Merchant
               </button>
             </div>
+
+            {/* Social proof */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="flex items-center gap-6 mt-12 pt-8 border-t border-border"
+            >
+              <div>
+                <span className="text-3xl font-extrabold text-foreground">50K+</span>
+                <p className="text-xs text-muted-foreground mt-0.5">Active Users</p>
+              </div>
+              <div className="w-px h-10 bg-border" />
+              <div>
+                <span className="text-3xl font-extrabold text-foreground">1,200+</span>
+                <p className="text-xs text-muted-foreground mt-0.5">Vendors</p>
+              </div>
+              <div className="w-px h-10 bg-border" />
+              <div>
+                <span className="text-3xl font-extrabold text-foreground">4.8★</span>
+                <p className="text-xs text-muted-foreground mt-0.5">App Rating</p>
+              </div>
+            </motion.div>
           </motion.div>
 
+          {/* Phone mockup */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex justify-center"
+            initial={{ opacity: 0, y: 50, rotateZ: 3 }}
+            animate={{ opacity: 1, y: 0, rotateZ: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+            className="flex justify-center lg:justify-end"
           >
-            <img
-              src={heroImg}
-              alt="Vendor food delivery illustration"
-              className="w-full max-w-lg animate-float"
-            />
+            <div className="w-[260px] sm:w-[290px] lg:w-[300px] animate-float">
+              <PhoneMockup
+                screenshot={appHome}
+                alt="Vendor food delivery app home screen on Samsung Galaxy S26 Ultra"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
