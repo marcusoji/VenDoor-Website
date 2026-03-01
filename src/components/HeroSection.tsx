@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Bike } from "lucide-react";
 import PhoneMockup from "./PhoneMockup";
 import appHome from "@/assets/app-home.jpg";
 
@@ -53,12 +53,28 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl text-sm font-bold flex items-center gap-3 hover:opacity-90 transition-all shadow-xl shadow-primary/30 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98]">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl text-sm font-bold flex items-center gap-3 shadow-xl shadow-primary/30 hover:shadow-primary/40"
+              >
                 Download Now <ArrowRight size={18} />
-              </button>
-              <button className="bg-secondary text-secondary-foreground px-8 py-4 rounded-2xl text-sm font-bold hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98]">
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="bg-secondary text-secondary-foreground px-8 py-4 rounded-2xl text-sm font-bold"
+              >
                 Become a Merchant
-              </button>
+              </motion.button>
+              <motion.a
+                href="#join-riders"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="border-2 border-primary text-primary px-8 py-4 rounded-2xl text-sm font-bold flex items-center gap-2 hover:bg-primary/5 transition-colors"
+              >
+                <Bike size={18} /> Ride with Us
+              </motion.a>
             </div>
 
             {/* Social proof */}
@@ -95,7 +111,7 @@ const HeroSection = () => {
             <div className="w-[260px] sm:w-[290px] lg:w-[300px] animate-float">
               <PhoneMockup
                 screenshot={appHome}
-                alt="Vendor food delivery app home screen on Samsung Galaxy S26 Ultra"
+                alt="Vendor food delivery app home screen on Samsung Galaxy S25 Ultra"
               />
             </div>
           </motion.div>

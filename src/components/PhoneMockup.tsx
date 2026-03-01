@@ -18,7 +18,7 @@ const PhoneMockup = ({ screenshot, alt, className, glowColor = "primary" }: Phon
         )}
       />
       
-      {/* Phone frame - Samsung Galaxy S26 Ultra style */}
+      {/* Phone frame - Samsung Galaxy S25 Ultra style */}
       <div className="relative bg-foreground rounded-[2.8rem] p-[3px] shadow-2xl shadow-foreground/20">
         {/* Inner bezel */}
         <div className="bg-foreground/90 rounded-[2.6rem] p-[6px] relative">

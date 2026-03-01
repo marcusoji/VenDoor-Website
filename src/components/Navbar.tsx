@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navItems = ["Features", "How it Works", "App Preview", "Merchants"];
+const navItems = ["Features", "How it Works", "App Preview", "Ride with Us"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ const Navbar = () => {
           {navItems.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase().replace(/ /g, "-")}`}
+              href={item === "Ride with Us" ? "#join-riders" : `#${item.toLowerCase().replace(/ /g, "-")}`}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {item}
@@ -47,7 +47,7 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase().replace(/ /g, "-")}`}
+                  href={item === "Ride with Us" ? "#join-riders" : `#${item.toLowerCase().replace(/ /g, "-")}`}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground py-2"
                   onClick={() => setOpen(false)}
                 >
