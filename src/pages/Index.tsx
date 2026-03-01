@@ -7,6 +7,7 @@ import AppShowcase from "@/components/AppShowcase";
 import RiderCTA from "@/components/RiderCTA";
 import PopularMeals from "@/components/PopularMeals";
 import CTASection from "@/components/CTASection";
+import NigeriaMap from "@/components/NigeriaMap";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
         <AppShowcase />
         <RiderCTA />
         <PopularMeals />
+        <NigeriaMap />
         <CTASection />
       </main>
       <Footer />
