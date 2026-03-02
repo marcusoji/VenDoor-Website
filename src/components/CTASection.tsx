@@ -22,7 +22,7 @@ const CTASection = () => {
               <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
                 Ready to Order?
                 <br />
-                <span className="text-primary">Download Vendor</span>
+                <span className="text-primary">Download VenDoor</span>
               </h2>
               <p className="text-secondary-foreground/75 max-w-md mb-10 text-lg leading-relaxed">
                 Join 50,000+ users already enjoying fast, affordable food delivery. Available on iOS and Android.
@@ -48,7 +48,7 @@ const CTASection = () => {
               <div className="w-[240px] -mb-32">
                 <PhoneMockup
                   screenshot={appOrder}
-                  alt="Vendor app order customization screen"
+                  alt="VenDoor app order customization screen"
                   glowColor="primary"
                 />
               </div>

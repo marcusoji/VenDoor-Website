@@ -49,7 +49,7 @@ const HeroSection = () => {
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-10 leading-relaxed">
               Discover local vendors, customize your order, and get it delivered in minutes. 
-              <span className="text-foreground font-semibold"> Vendor</span> makes it effortless.
+              <span className="text-foreground font-semibold"> VenDoor</span> makes it effortless.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -111,7 +111,7 @@ const HeroSection = () => {
             <div className="w-[260px] sm:w-[290px] lg:w-[300px] animate-float">
               <PhoneMockup
                 screenshot={appHome}
-                alt="Vendor food delivery app home screen on Samsung Galaxy S25 Ultra"
+                alt="VenDoor food delivery app home screen on Samsung Galaxy S25 Ultra"
               />
             </div>
           </motion.div>

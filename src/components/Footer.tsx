@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-10 mb-12">
           <div>
             <h3 className="font-display text-2xl font-extrabold mb-4">
-              Vendor<span className="text-primary">.</span>
+              VenDoor<span className="text-primary">.</span>
             </h3>
             <p className="text-sm text-secondary-foreground/65 leading-relaxed mb-6">
               Your favourite meals, delivered fast and fresh. Anytime, anywhere.
@@ -92,7 +92,7 @@ const Footer = () => {
 
         <div className="border-t border-secondary-foreground/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-secondary-foreground/40">
-            © {new Date().getFullYear()} Vendor. All rights reserved.
+            © {new Date().getFullYear()} VenDoor. All rights reserved.
           </p>
           <p className="text-xs text-secondary-foreground/40">
             Made with 🧡 in Nigeria

@@ -46,7 +46,7 @@ const AppShowcase = () => {
           >
             <PhoneMockup
               screenshot={appHome}
-              alt="Vendor app home screen showing top vendors and meals"
+              alt="VenDoor app home screen showing top vendors and meals"
               glowColor="primary"
             />
             <motion.div
@@ -71,7 +71,7 @@ const AppShowcase = () => {
           >
             <PhoneMockup
               screenshot={appOrder}
-              alt="Vendor app order screen with meal customization"
+              alt="VenDoor app order screen with meal customization"
               glowColor="secondary"
             />
             <motion.div
