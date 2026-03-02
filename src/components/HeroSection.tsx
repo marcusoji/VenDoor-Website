@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Bike } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PhoneMockup from "./PhoneMockup";
 import appHome from "@/assets/app-home.jpg";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative pt-24 pb-8 md:pt-32 md:pb-16 overflow-hidden min-h-[90vh] flex items-center">
       {/* Layered background */}
@@ -63,6 +65,7 @@ const HeroSection = () => {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                onClick={() => navigate("/vendor-register")}
                 className="bg-secondary text-secondary-foreground px-8 py-4 rounded-2xl text-sm font-bold"
               >
                 Become a Merchant
