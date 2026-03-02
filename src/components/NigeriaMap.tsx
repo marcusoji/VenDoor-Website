@@ -43,7 +43,7 @@ const NigeriaMap = () => {
             className="relative flex-1 w-full max-w-[550px]"
           >
             <svg
-              viewBox="100 0 650 620"
+              viewBox="50 0 750 620"
               className="w-full h-auto"
               xmlns="http://www.w3.org/2000/svg"
             >

@@ -71,7 +71,7 @@ const FeaturesSection = () => {
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-3 block">Features</span>
           <h2 className="text-4xl md:text-6xl font-extrabold mb-5">
-            Why Choose <span className="text-gradient">Vendor</span>?
+            Why Choose <span className="text-gradient">VenDoor</span>?
           </h2>
           <p className="text-muted-foreground max-w-md mx-auto text-lg">
             Everything you need for a seamless food ordering experience.
