@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import PhoneMockup from "./PhoneMockup";
 import food1 from "@/assets/food-1.jpg";
 import food2 from "@/assets/food-2.jpg";
 
@@ -36,19 +35,25 @@ const AppShowcase = () => {
         </motion.div>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-          {/* Left phone - Home */}
+          {/* Left - Discover */}
           <motion.div
             initial={{ opacity: 0, x: -60, rotateY: 15 }}
             whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-[260px] md:w-[280px]"
+            className="w-[280px] md:w-[320px]"
           >
-            <PhoneMockup
-              screenshot={food1}
-              alt="VenDoor app home screen showing top vendors and meals"
-              glowColor="primary"
-            />
+            <div className="relative group">
+              <div className="absolute -inset-4 rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-700 bg-primary" />
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-foreground/20">
+                <img
+                  src={food1}
+                  alt="VenDoor app home screen showing top vendors and meals"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -61,19 +66,25 @@ const AppShowcase = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right phone - Order */}
+          {/* Right - Order */}
           <motion.div
             initial={{ opacity: 0, x: 60, rotateY: -15 }}
             whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="w-[260px] md:w-[280px]"
+            className="w-[280px] md:w-[320px]"
           >
-            <PhoneMockup
-              screenshot={food2}
-              alt="VenDoor app order screen with meal customization"
-              glowColor="secondary"
-            />
+            <div className="relative group">
+              <div className="absolute -inset-4 rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-700 bg-accent" />
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-foreground/20">
+                <img
+                  src={food2}
+                  alt="VenDoor app order screen with meal customization"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
