@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Bike, ArrowRight, DollarSign, Clock, MapPin, Shield, User, Phone, Mail, Upload, Check } from "lucide-react";
+import { Bike, ArrowRight, DollarSign, Clock, MapPin, Shield, User, Phone, Mail, Upload, Check, Car } from "lucide-react";
 import { useState, useRef } from "react";
 
 const perks = [
@@ -9,11 +9,19 @@ const perks = [
   { icon: Shield, text: "Insurance & rider support" },
 ];
 
+const BicycleIcon = ({ size = 20, className = "" }: { size?: number; className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>
+  </svg>
+);
+
 const vehicleTypes = [
-  { value: "bicycle", label: "🚲 Bicycle" },
-  { value: "bike", label: "🏍️ Bike" },
-  { value: "car", label: "🚗 Car" },
+  { value: "bicycle", label: "Bicycle", icon: BicycleIcon },
+  { value: "bike", label: "Bike", icon: Bike },
+  { value: "car", label: "Car", icon: Car },
 ];
+
+const requiresLicense = (vehicleType: string) => vehicleType === "bike" || vehicleType === "car";
 
 const boxSizes = [
   { value: "small", label: "Small (3 orders)" },
@@ -42,7 +50,8 @@ const RiderCTA = () => {
     }
   };
 
-  const isFormValid = formData.name && formData.phone && formData.email && formData.city && formData.vehicleType && formData.boxSize && formData.agreedToTerms;
+  const needsLicense = requiresLicense(formData.vehicleType);
+  const isFormValid = formData.name && formData.phone && formData.email && formData.city && formData.vehicleType && formData.boxSize && formData.agreedToTerms && (!needsLicense || licenseFile);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -268,12 +277,13 @@ const RiderCTA = () => {
                             type="button"
                             key={v.value}
                             onClick={() => setFormData({ ...formData, vehicleType: v.value })}
-                            className={`py-2.5 rounded-xl border text-sm font-semibold transition-all ${
+                            className={`py-3 rounded-xl border text-sm font-semibold transition-all flex flex-col items-center gap-1.5 ${
                               formData.vehicleType === v.value
                                 ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
                                 : "bg-background border-border hover:border-primary/40"
                             }`}
                           >
+                            <v.icon size={20} />
                             {v.label}
                           </button>
                         ))}
@@ -301,9 +311,12 @@ const RiderCTA = () => {
                       </div>
                     </div>
 
-                    {/* Driver's License Upload */}
+                    {/* Driver's License Upload - required for bike/car */}
+                    {(formData.vehicleType === "bike" || formData.vehicleType === "car") && (
                     <div>
-                      <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1.5">Driver's License (optional)</label>
+                      <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1.5">
+                        Driver's License <span className="text-destructive">*</span>
+                      </label>
                       <input
                         ref={fileInputRef}
                         type="file"
@@ -328,6 +341,7 @@ const RiderCTA = () => {
                         )}
                       </button>
                     </div>
+                    )}
 
                     {/* Terms checkbox */}
                     <label className="flex items-start gap-3 cursor-pointer group">

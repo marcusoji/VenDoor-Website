@@ -10,18 +10,28 @@ const meals = [
   { img: food3, name: "Fried Rice Special", vendor: "Chef Bolaji's", price: "₦4,000", rating: 4.7, tag: "⭐ Top Rated" },
 ];
 
+const floatVariants = [
+  { rotate: -6, y: 20, x: -30 },
+  { rotate: 2, y: -15, x: 0 },
+  { rotate: 5, y: 10, x: 25 },
+];
+
 const PopularMeals = () => {
   return (
-    <section className="py-24 md:py-32">
-      <div className="container">
+    <section className="py-24 md:py-36 relative overflow-hidden">
+      {/* Background accents */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[200px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-3 block">Trending Now</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-5">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-5">
             Popular <span className="text-gradient">Meals</span>
           </h2>
           <p className="text-muted-foreground max-w-md mx-auto text-lg">
@@ -29,45 +39,67 @@ const PopularMeals = () => {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-4xl mx-auto">
+        {/* Floating dish layout */}
+        <div className="relative max-w-5xl mx-auto min-h-[500px] md:min-h-[600px] flex items-center justify-center">
           {meals.map((m, i) => (
             <motion.div
               key={m.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.8, ...floatVariants[i] }}
+              whileInView={{ opacity: 1, scale: 1, ...floatVariants[i] }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12, duration: 0.5, type: "spring" }}
-              whileHover={{ y: -8 }}
-              className="bg-card rounded-3xl border border-border overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer"
+              transition={{ delay: i * 0.15, duration: 0.7, type: "spring", stiffness: 80 }}
+              whileHover={{ scale: 1.08, rotate: 0, y: -20, zIndex: 30 }}
+              className="absolute cursor-pointer group"
+              style={{
+                left: i === 0 ? '0%' : i === 1 ? '30%' : '60%',
+                top: i === 0 ? '15%' : i === 1 ? '5%' : '20%',
+                zIndex: i === 1 ? 20 : 10,
+              }}
             >
-              <div className="aspect-square overflow-hidden relative">
-                <img
-                  src={m.img}
-                  alt={m.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
-                />
-                {/* Tag badge */}
-                <div className="absolute top-3 left-3 bg-card/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-bold">
+              {/* Floating dish card */}
+              <div className="relative w-[260px] sm:w-[300px]">
+                {/* Dish image with HDR-style treatment */}
+                <div className="relative w-52 h-52 sm:w-60 sm:h-60 mx-auto rounded-full overflow-hidden shadow-2xl shadow-foreground/20 ring-4 ring-card group-hover:shadow-primary/30 group-hover:ring-primary/20 transition-all duration-500">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 saturate-[1.3] contrast-[1.1] brightness-[1.05]"
+                    loading="lazy"
+                  />
+                  {/* HDR glow overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 mix-blend-overlay" />
+                </div>
+
+                {/* Tag floating above */}
+                <motion.div
+                  className="absolute -top-2 left-1/2 -translate-x-1/2 bg-card/95 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs font-bold border border-border shadow-lg whitespace-nowrap"
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                >
                   {m.tag}
-                </div>
-                {/* Order overlay on hover */}
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
-                  <span className="bg-primary text-primary-foreground px-5 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shadow-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    Order Now <ArrowRight size={14} />
-                  </span>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-bold text-lg mb-1">{m.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{m.vendor}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-primary font-extrabold text-xl">{m.price}</span>
-                  <span className="flex items-center gap-1 text-sm text-muted-foreground bg-primary/5 px-2.5 py-1 rounded-lg">
-                    <Star size={14} className="fill-primary text-primary" />
-                    {m.rating}
-                  </span>
-                </div>
+                </motion.div>
+
+                {/* Info card below dish */}
+                <motion.div
+                  className="mt-4 bg-card/95 backdrop-blur-sm rounded-2xl p-4 border border-border shadow-xl mx-auto max-w-[240px] group-hover:shadow-2xl group-hover:border-primary/20 transition-all duration-300"
+                >
+                  <h3 className="font-bold text-base mb-0.5">{m.name}</h3>
+                  <p className="text-xs text-muted-foreground mb-3">{m.vendor}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-primary font-extrabold text-lg">{m.price}</span>
+                    <span className="flex items-center gap-1 text-xs text-muted-foreground bg-primary/5 px-2 py-1 rounded-lg">
+                      <Star size={12} className="fill-primary text-primary" />
+                      {m.rating}
+                    </span>
+                  </div>
+                  {/* Order button on hover */}
+                  <div className="overflow-hidden max-h-0 group-hover:max-h-12 transition-all duration-300">
+                    <button className="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5">
+                      Order Now <ArrowRight size={14} />
+                    </button>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}
