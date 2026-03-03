@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import PhoneMockup from "./PhoneMockup";
-import appHome from "@/assets/app-home.jpg";
-import appOrder from "@/assets/app-order.jpg";
+import food1 from "@/assets/food-1.jpg";
+import food2 from "@/assets/food-2.jpg";
 
 const AppShowcase = () => {
   return (
@@ -45,7 +45,7 @@ const AppShowcase = () => {
             className="w-[260px] md:w-[280px]"
           >
             <PhoneMockup
-              screenshot={appHome}
+              screenshot={food1}
               alt="VenDoor app home screen showing top vendors and meals"
               glowColor="primary"
             />
@@ -70,7 +70,7 @@ const AppShowcase = () => {
             className="w-[260px] md:w-[280px]"
           >
             <PhoneMockup
-              screenshot={appOrder}
+              screenshot={food2}
               alt="VenDoor app order screen with meal customization"
               glowColor="secondary"
             />
