@@ -21,7 +21,7 @@ const vehicleTypes = [
   { value: "car", label: "Car", icon: Car },
 ];
 
-const requiresLicense = (vehicleType: string) => vehicleType === "bike" || vehicleType === "car";
+const requiresLicense = (vehicleType: string) => vehicleType === "car";
 
 const boxSizes = [
   { value: "small", label: "Small (3 orders)" },
@@ -311,8 +311,8 @@ const RiderCTA = () => {
                       </div>
                     </div>
 
-                    {/* Driver's License Upload - required for bike/car */}
-                    {(formData.vehicleType === "bike" || formData.vehicleType === "car") && (
+                    {/* Driver's License Upload - required for car only */}
+                    {formData.vehicleType === "car" && (
                     <div>
                       <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1.5">
                         Driver's License <span className="text-destructive">*</span>
