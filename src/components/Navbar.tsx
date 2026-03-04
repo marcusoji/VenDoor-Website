@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = ["Features", "How it Works", "App Preview", "Ride with Us"];
 
@@ -25,6 +26,7 @@ const Navbar = () => {
               {item}
             </a>
           ))}
+          <ThemeToggle />
           <button className="bg-primary text-primary-foreground px-6 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-primary/20">
             Get the App
           </button>
@@ -54,9 +56,12 @@ const Navbar = () => {
                   {item}
                 </a>
               ))}
-              <button className="bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-bold mt-2">
-                Get the App
-              </button>
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                <button className="bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-bold">
+                  Get the App
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
