@@ -5,7 +5,7 @@ import {
   ArrowLeft, ArrowRight, Upload, MapPin, Clock, Check,
   Store, Phone, Mail, FileText, Building2, Loader2, X
 } from "lucide-react";
-
+import { uploadImage, registerVendor } from "@/lib/api";
 const STEPS = ["Business Info", "Location & Contact", "Operating Details", "Legal & Verification"];
 
 const CATEGORIES = ["Restaurant", "Fast Food", "Bakery", "Drinks", "Groceries", "Others"];
@@ -127,16 +127,57 @@ const VendorRegister = () => {
 
   const stepValid = [isStep1Valid, isStep2Valid, isStep3Valid, isStep4Valid];
 
-  const handleSubmit = () => {
-    if (!isStep4Valid || submitting) return;
-    setSubmitting(true);
-    setTimeout(() => {
-      localStorage.removeItem(STORAGE_KEY);
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 2500);
-  };
 
+const handleSubmit = async () => {
+  if (!isStep4Valid || submitting) return;
+  setSubmitting(true);
+
+  try {
+    // Upload logo if selected
+    let logoUrl = null;
+    if (logoRef.current?.files?.[0]) {
+      const res = await uploadImage(logoRef.current.files[0], "logos");
+      logoUrl = res.data.url;
+    }
+
+    // Upload government ID if selected
+    let govIdUrl = null;
+    if (govIdRef.current?.files?.[0]) {
+      const res = await uploadImage(govIdRef.current.files[0], "documents");
+      govIdUrl = res.data.url;
+    }
+
+    await registerVendor({
+      businessName,
+      categories,
+      description,
+      logoUrl,
+      address,
+      phone,
+      email,
+      state,
+      city,
+      operatingDays,
+      openTime,
+      closeTime,
+      deliveryRadius,
+      prepTime,
+      offersPickup,
+      offersScheduled,
+      bizRegNo,
+      bankName,
+      accountName,
+      accountNumber,
+    });
+
+    localStorage.removeItem(STORAGE_KEY);
+    setSubmitted(true);
+  } catch (err: any) {
+    alert(err.message || "Registration failed. Please try again.");
+  } finally {
+    setSubmitting(false);
+  }
+};
   if (submitted) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
