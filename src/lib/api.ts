@@ -21,7 +21,8 @@ export const registerUser  = (body: object) => request("/api/auth/register", { m
 export const loginUser     = (body: object) => request("/api/auth/login",    { method: "POST", body: JSON.stringify(body) });
 export const getMe         = ()             => request("/api/auth/me");
 export const registerVendor = (body: object) => request("/api/vendors",      { method: "POST", body: JSON.stringify(body) });
-
+export const registerRider = (body: object) =>
+ request("/api/riders", { method: "POST", body: JSON.stringify(body) });
 export const uploadImage = async (file: File, folder = "general") => {
   const token = getToken();
   const form = new FormData();

@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Bike, ArrowRight, DollarSign, Clock, MapPin, Shield, User, Phone, Mail, Upload, Check, Car } from "lucide-react";
 import { useState, useRef } from "react";
-
+import { uploadImage, registerRider } from "@/lib/api";
 const perks = [
   { icon: DollarSign, text: "Earn up to ₦150K/month" },
   { icon: Clock, text: "Flexible hours, your schedule" },
@@ -53,16 +53,40 @@ const RiderCTA = () => {
   const needsLicense = requiresLicense(formData.vehicleType);
   const isFormValid = formData.name && formData.phone && formData.email && formData.city && formData.vehicleType && formData.boxSize && formData.agreedToTerms && (!needsLicense || licenseFile);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isFormValid) return;
-    setShowEnvelope(true);
+  
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!isFormValid) return;
+  setShowEnvelope(true);
+
+  try {
+    // Upload license if car was selected
+    let licenseUrl = null;
+    if (licenseFile) {
+      const uploadRes = await uploadImage(licenseFile, "documents");
+      licenseUrl = uploadRes.data.url;
+    }
+
+    await registerRider({
+      fullName: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      city: formData.city,
+      vehicleType: formData.vehicleType,
+      boxSize: formData.boxSize,
+      licenseUrl,
+    });
+
     setTimeout(() => {
       setSubmitted(true);
       setShowEnvelope(false);
     }, 3000);
-  };
-
+  } catch (err: any) {
+    setShowEnvelope(false);
+    alert(err.message || "Application failed. Please try again.");
+  }
+};
   return (
     <section id="join-riders" className="py-24 md:py-36 relative overflow-hidden">
       {/* Animated road/path background */}
